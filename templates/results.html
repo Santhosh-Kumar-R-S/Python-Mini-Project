@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +22,22 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+.logo2 {
+            position: absolute;
+            top: 80px;
+            right: 275px;
+            width: 150px;
+            height: 150px;
+            
+            overflow: hidden;
+        }
+
+        .logo2 img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
 
         h1 {
             text-align: center;
@@ -37,14 +54,59 @@
             font-weight: bold;
             color: #007bff;
         }
+
+        .typing-animation {
+            overflow: hidden; /* Hide overflow to create typing effect */
+            white-space: nowrap; /* Prevent wrapping */
+            border-right: .15em solid orange; /* Typing cursor */
+            display: inline-block; /* Ensure the animation works correctly */
+        }
+
+        .green-line {
+            color: green;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Your Quiz Results</h1>
+            <div class="logo2">
+                <img src="{{ url_for('static', filename='flat.png') }}" alt="Flat Image">
+            </div>
         <p class="result">{{ grade_message }}</p>
-        <p>You scored <span class="result">{{ score }}</span> out of {{ total_problems }}.</p>
+        <p>You scored <span class="result" id="score">0</span> out of {{ total_problems }}.</p>
         <p>Total time taken: <span class="result">{{ total_time }}</span> seconds.</p>
+        <p class="green-line"> <span id="typing-animation-container"><b></b></span></p> 
     </div>
+    <script>
+        // JavaScript to trigger the typing animation and score increment
+        document.addEventListener('DOMContentLoaded', function() {
+            var email = "Your result has been successfully sent to your email address: {{ session['email']}}";
+            var container = document.getElementById('typing-animation-container');
+            var index = 0;
+
+            function typeText() {
+                if (index < email.length) {
+                    container.innerHTML += email.charAt(index);
+                    index++;
+                    setTimeout(typeText, 25); // Adjust the typing speed (milliseconds)
+                }
+            }
+
+            typeText();
+
+            // Animate the score incrementally
+            var scoreElement = document.getElementById('score');
+            var score = 0;
+            var intervalId = setInterval(function() {
+                scoreElement.textContent = score;
+                score++;
+                if (score > {{ score }}) {  // Stop when the displayed score reaches the actual score
+                    clearInterval(intervalId);
+                }
+            }, 200); // Adjust the increment speed (milliseconds)
+        });
+    </script>
 </body>
 </html>
