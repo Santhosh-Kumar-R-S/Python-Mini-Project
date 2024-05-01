@@ -14,16 +14,29 @@
 
         .container {
             max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
+            height: 100px;
+	    margin: 50px auto;
+            padding: 40px;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 150px;
+            height: 150px;
+            height: auto;
         }
 
         h1 {
             text-align: center;
             color: #333;
+            font-size: 36px;
+            margin-bottom: 20px;
         }
 
         form {
@@ -31,23 +44,25 @@
         }
 
         input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #007bff;
+            padding: 12px 24px;
+            background-color: #4CAF50;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
+            transition: background-color 0.3s;
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Welcome to the Math Quiz!</h1>
+        <img class="logo" src="{{ url_for('static', filename='flat.png') }}" alt="Logo">
         <form action="{{ url_for('quiz') }}" method="post">
             <input type="submit" value="Start Quiz">
         </form>
