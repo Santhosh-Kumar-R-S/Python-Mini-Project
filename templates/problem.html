@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Problem {{ problem_number }}</title>
+    <title>Math Quiz - Problem</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,40 +13,93 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 50px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .logo2 {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px; /* Increase logo2 width */
+            height:150px; /* Increase logo2 height */
+            height:auto;
+		}
+
+        .logo2 img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 70px;
+            height: auto;
         }
 
         h1 {
             text-align: center;
             color: #333;
+            margin: 0;
         }
 
-        p {
+        .problem-container {
             text-align: center;
-            color: #666;
-            font-size: 18px;
-            margin-bottom: 20px;
+        }
+
+        .problem-number {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .expression {
+            font-size: 24px;
+            margin-top: 20px;
         }
 
         form {
             text-align: center;
+            margin-top: 20px;
         }
 
         input[type="number"] {
             padding: 10px;
-            width: 100px;
+            width: calc(100% - 10px);
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 16px;
         }
 
-        input[type="submit"] {
-            padding: 10px 20px;
+        button {
+            padding: 8px 16px; /* Decrease button size */
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -55,19 +108,48 @@
             font-size: 16px;
         }
 
-        input[type="submit"]:hover {
+        button:hover {
             background-color: #0056b3;
+        }
+
+        .skip-btn {
+            background-color: #ccc;
+            color: #333;
+            margin-left: 10px;
+        }
+
+        .skip-btn:hover {
+            background-color: #bbb;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Problem {{ problem_number }}</h1>
-        <p>{{ expression }} = ?</p>
-        <form action="{{ url_for('problem', problem_number=problem_number) }}" method="post">
-            <input type="number" name="answer" required>
-            <input type="submit" value="Submit Answer">
+        <div class="header">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='Srinivas University logo.png') }}" alt="Srinivas University Logo">
+            </div>
+           
+            <div class="logo2">
+                <img src="{{ url_for('static', filename='flat.png') }}" alt="Flat Image">
+            </div>
+        </div>
+        <div class="problem-container">
+            <p class="problem-number"> Problem {{ problem_number }}</p>
+            <p class="expression">{{ expression }}</p>
+        </div>
+        <form id="quiz-form" action="{{ url_for('problem', problem_number=problem_number) }}" method="post">
+            <input type="number" id="answer" name="answer" placeholder="Enter your answer" required>
+            <button type="submit">Submit</button>
+            <button type="button" id="skip-btn" class="skip-btn">Skip</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById("skip-btn").addEventListener("click", function() {
+            document.getElementById("answer").removeAttribute("required");
+            document.getElementById("quiz-form").submit();
+        });
+    </script>
 </body>
 </html>
