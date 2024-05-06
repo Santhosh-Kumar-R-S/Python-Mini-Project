@@ -22,6 +22,21 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
+        .logo2 {
+            position: absolute;
+            top: 80px;
+            right: 275px;
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .logo2 img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         h1 {
             text-align: center;
             color: #333;
@@ -49,20 +64,53 @@
             color: green;
             font-size: 18px;
         }
+
+        .participant {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .participant-name {
+            font-weight: bold;
+        }
+
+        .participant-details {
+            color: #888;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Your Quiz Results</h1>
+        <div class="logo2">
+            <img src="{{ url_for('static', filename='flat.png') }}" alt="Flat Image">
+        </div>
         <p class="result">{{ grade_message }}</p>
         <p>You scored <span class="result" id="score">0</span> out of {{ total_problems }}.</p>
         <p>Total time taken: <span class="result">{{ total_time }}</span> seconds.</p>
-        <p class="green-line"> <span id="typing-animation-container"><b></b></span></p> 
+        <p class="green-line"><span id="typing-animation-container"><b></b></span></p> 
+
+        <!-- Button to toggle participants visibility -->
+        <button id="showParticipantsButton">Show Participants</button>
+
+        <!-- Participants section -->
+        <div id="participantsSection" style="display: none;">
+            <h2>Participants:</h2>
+            {% for participant in participants %}
+            <div class="participant">
+                <p class="participant-name">{{ participant[0] }}</p>
+                <p class="participant-details">Marks: <span class="result" id="participantMarks{{ loop.index }}">{{ participant[1] }}</span></p>
+                <p class="participant-details">Time taken: {{ participant[2] }} seconds</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
+
     <script>
-        // JavaScript to trigger the typing animation and score increment
+        // JavaScript to trigger the typing animation
         document.addEventListener('DOMContentLoaded', function() {
-            var email = "Your result has been successfully sent to your email address: {{ session['email']|replace('@', ' [at] ') }}";
+            var email = "Your result has been successfully sent through Gmail to your email address: {{ session['email'] }}";
             var container = document.getElementById('typing-animation-container');
             var index = 0;
 
@@ -70,13 +118,15 @@
                 if (index < email.length) {
                     container.innerHTML += email.charAt(index);
                     index++;
-                    setTimeout(typeText, 100); // Adjust the typing speed (milliseconds)
+                    setTimeout(typeText, 25); // Adjust the typing speed (milliseconds)
                 }
             }
 
             typeText();
+        });
 
-            // Animate the score incrementally
+        // JavaScript to incrementally increase the displayed score
+        document.addEventListener('DOMContentLoaded', function() {
             var scoreElement = document.getElementById('score');
             var score = 0;
             var intervalId = setInterval(function() {
@@ -85,7 +135,24 @@
                 if (score > {{ score }}) {  // Stop when the displayed score reaches the actual score
                     clearInterval(intervalId);
                 }
-            }, 100); // Adjust the increment speed (milliseconds)
+            }, 200); // Adjust the increment speed (milliseconds)
+        });
+
+        // JavaScript to toggle participants visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            var showParticipantsButton = document.getElementById('showParticipantsButton');
+            var participantsSection = document.getElementById('participantsSection');
+
+            showParticipantsButton.addEventListener('click', function() {
+                // Toggle visibility of participants section
+                if (participantsSection.style.display === 'none') {
+                    participantsSection.style.display = 'block';
+                    showParticipantsButton.textContent = 'Hide Participants';
+                } else {
+                    participantsSection.style.display = 'none';
+                    showParticipantsButton.textContent = 'Show Participants';
+                }
+            });
         });
     </script>
 </body>
