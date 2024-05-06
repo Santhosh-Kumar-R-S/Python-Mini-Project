@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Quiz - Problem</title>
+    <title>Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f7f7f7;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         .container {
@@ -19,87 +20,41 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            position: relative;
         }
-
         .logo {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .logo img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .logo2 {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 150px; /* Increase logo2 width */
-            height:150px; /* Increase logo2 height */
-            height:auto;
-		}
-
-        .logo2 img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .header img {
-            width: 70px;
+            top: 70px;
+            left: 275px;
+            width: 150px;
+            height: 150px;
             height: auto;
         }
 
         h1 {
             text-align: center;
             color: #333;
-            margin: 0;
         }
 
-        .problem-container {
-            text-align: center;
-        }
-
-        .problem-number {
-            font-size: 24px;
-            margin-top: 20px;
-        }
-
-        .expression {
-            font-size: 24px;
-            margin-top: 20px;
-        }
-
-        form {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        input[type="number"] {
-            padding: 10px;
-            width: calc(100% - 10px);
+        label {
+            display: block;
             margin-bottom: 10px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
         }
 
-        button {
-            padding: 8px 16px; /* Decrease button size */
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -108,48 +63,25 @@
             font-size: 16px;
         }
 
-        button:hover {
+        button[type="submit"]:hover {
+	 padding: 8px 16px;
             background-color: #0056b3;
         }
 
-        .skip-btn {
-            background-color: #ccc;
-            color: #333;
-            margin-left: 10px;
-        }
-
-        .skip-btn:hover {
-            background-color: #bbb;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <div class="logo">
-                <img src="{{ url_for('static', filename='Srinivas University logo.png') }}" alt="Srinivas University Logo">
-            </div>
-           
-            <div class="logo2">
-                <img src="{{ url_for('static', filename='flat.png') }}" alt="Flat Image">
-            </div>
-        </div>
-        <div class="problem-container">
-            <p class="problem-number"> Problem {{ problem_number }}</p>
-            <p class="expression">{{ expression }}</p>
-        </div>
-        <form id="quiz-form" action="{{ url_for('problem', problem_number=problem_number) }}" method="post">
-            <input type="number" id="answer" name="answer" placeholder="Enter your answer" required>
-            <button type="submit">Submit</button>
-            <button type="button" id="skip-btn" class="skip-btn">Skip</button>
+        <h1>Welcome to the Quiz!</h1>
+	 <img class="logo" src="{{ url_for('static',filename='flat.png')}}" alt="Logo">
+
+        <form action="{{ url_for('quiz') }}" method="post">
+            <label for="name">Enter your name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Enter your email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Start Quiz</button>
         </form>
     </div>
-
-    <script>
-        document.getElementById("skip-btn").addEventListener("click", function() {
-            document.getElementById("answer").removeAttribute("required");
-            document.getElementById("quiz-form").submit();
-        });
-    </script>
 </body>
 </html>
