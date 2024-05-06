@@ -13,7 +13,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 50px auto;
             padding: 20px;
             background-color: #fff;
@@ -25,29 +25,23 @@
         .logo {
             position: absolute;
             top: 10px;
-            left: 10px;
+            right: 10px;
             width: 70px;
             height: 70px;
             border-radius: 50%;
             overflow: hidden;
         }
-
-        .logo img {
-            width: 100%;
+.logo2 {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 125px;
             height: auto;
-            display: block;
+            
+            overflow: hidden;
         }
 
-        .logo2 {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 150px; /* Increase logo2 width */
-            height:150px; /* Increase logo2 height */
-            height:auto;
-		}
-
-        .logo2 img {
+        .logo img {
             width: 100%;
             height: auto;
             display: block;
@@ -130,10 +124,10 @@
                 <img src="{{ url_for('static', filename='Srinivas University logo.png') }}" alt="Srinivas University Logo">
             </div>
            
-            <div class="logo2">
-                <img src="{{ url_for('static', filename='flat.png') }}" alt="Flat Image">
-            </div>
+            
+               
         </div>
+ <img class="logo2" src="{{ url_for('static', filename='flat.png') }}" alt="Flat Image">
         <div class="problem-container">
             <p class="problem-number"> Problem {{ problem_number }}</p>
             <p class="expression">{{ expression }}</p>
