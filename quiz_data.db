@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS quiz_data;
+
+USE quiz_data;
+
+CREATE TABLE IF NOT EXISTS quiz_results (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    marks INT,
+    time_taken FLOAT
+);
