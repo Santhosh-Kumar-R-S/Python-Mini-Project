@@ -1,11 +1,19 @@
 <!DOCTYPE html>
+<!-- This declares the document type and version of HTML being used. -->
 <html lang="en">
+<!-- This starts the HTML document and sets the language to English. -->
 <head>
+    <!-- This section contains metadata about the document, such as character encoding and viewport settings. -->
     <meta charset="UTF-8">
+    <!-- This specifies the character encoding of the document to UTF-8. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- This sets the viewport width to the device width and initial zoom level to 1.0. -->
     <title>Quiz Results</title>
+    <!-- This sets the title of the webpage. -->
     <style>
+        /* This section contains CSS styling for the webpage layout and elements. */
         body {
+            /* Styles for the body element */
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
@@ -14,6 +22,7 @@
         }
 
         .container {
+            /* Styles for the container div */
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
@@ -23,6 +32,7 @@
         }
 
         .logo2 {
+            /* Styles for the second logo div */
             position: absolute;
             top: 80px;
             right: 275px;
@@ -32,28 +42,33 @@
         }
 
         .logo2 img {
+            /* Styles for the logo image */
             width: 100%;
             height: auto;
             display: block;
         }
 
         h1 {
+            /* Styles for the heading */
             text-align: center;
             color: #333;
         }
 
         p {
+            /* Styles for paragraphs */
             margin: 20px 0;
             line-height: 1.5;
             color: #666;
         }
 
         .result {
+            /* Styles for result text */
             font-weight: bold;
             color: #007bff;
         }
 
         .typing-animation {
+            /* Styles for the typing animation */
             overflow: hidden; /* Hide overflow to create typing effect */
             white-space: nowrap; /* Prevent wrapping */
             border-right: .15em solid orange; /* Typing cursor */
@@ -61,55 +76,80 @@
         }
 
         .green-line {
+            /* Styles for the green line */
             color: green;
             font-size: 18px;
         }
 
         .participant {
+            /* Styles for participant details */
             margin-top: 20px;
             border-top: 1px solid #ccc;
             padding-top: 10px;
         }
 
         .participant-name {
+            /* Styles for participant name */
             font-weight: bold;
         }
 
         .participant-details {
+            /* Styles for participant details */
             color: #888;
         }
     </style>
 </head>
+<!-- This closes the head section of the document. -->
 <body>
+    <!-- This starts the body of the document. -->
     <div class="container">
+        <!-- This div contains the main content of the webpage. -->
         <h1>Your Quiz Results</h1>
+        <!-- This heading displays the quiz results. -->
         <div class="logo2">
+            <!-- This div contains the second logo image -->
             <img src="{{ url_for('static', filename='flat.png') }}" alt="Flat Image">
+            <!-- This image displays the flat image logo. -->
         </div>
         <p class="result">{{ grade_message }}</p>
+        <!-- This paragraph displays the grade message. -->
         <p>You scored <span class="result" id="score">0</span> out of {{ total_problems }}.</p>
+        <!-- This paragraph displays the score out of total problems. -->
         <p>Total time taken: <span class="result">{{ total_time }}</span> seconds.</p>
+        <!-- This paragraph displays the total time taken. -->
         <p class="green-line"><span id="typing-animation-container"><b></b></span></p> 
+        <!-- This paragraph contains the typing animation for displaying a message. -->
 
         <!-- Button to toggle participants visibility -->
         <button id="showParticipantsButton">Show Participants</button>
 
         <!-- Participants section -->
         <div id="participantsSection" style="display: none;">
+            <!-- This div contains the participants section -->
             <h2>Participants:</h2>
+            <!-- This heading displays participants -->
             {% for participant in participants %}
+            <!-- Loop through participants -->
             <div class="participant">
+                <!-- This div contains participant details -->
                 <p class="participant-name">{{ participant[0] }}</p>
+                <!-- This paragraph displays the participant name -->
                 <p class="participant-details">Marks: <span class="result" id="participantMarks{{ loop.index }}">{{ participant[1] }}</span></p>
+                <!-- This paragraph displays the participant marks -->
                 <p class="participant-details">Time taken: {{ participant[2] }} seconds</p>
+                <!-- This paragraph displays the time taken by the participant -->
             </div>
             {% endfor %}
+            <!-- End of loop -->
         </div>
+        <!-- End of participants section -->
     </div>
+    <!-- This closes the container div. -->
 
     <script>
         // JavaScript to trigger the typing animation
         document.addEventListener('DOMContentLoaded', function() {
+            // Function to type text gradually
             var email = "Your result has been successfully sent through Gmail to your email address: {{ session['email'] }}";
             var container = document.getElementById('typing-animation-container');
             var index = 0;
@@ -127,6 +167,7 @@
 
         // JavaScript to incrementally increase the displayed score
         document.addEventListener('DOMContentLoaded', function() {
+            // Function to increment score gradually
             var scoreElement = document.getElementById('score');
             var score = 0;
             var intervalId = setInterval(function() {
@@ -140,6 +181,7 @@
 
         // JavaScript to toggle participants visibility
         document.addEventListener('DOMContentLoaded', function() {
+            // Function to toggle participants visibility
             var showParticipantsButton = document.getElementById('showParticipantsButton');
             var participantsSection = document.getElementById('participantsSection');
 
@@ -155,5 +197,8 @@
             });
         });
     </script>
+    <!-- This JavaScript handles typing animation, score increment, and toggle participants visibility. -->
 </body>
+<!-- This closes the body section of the document. -->
 </html>
+<!-- This closes the HTML document. -->
