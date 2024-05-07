@@ -1,11 +1,19 @@
 <!DOCTYPE html>
+<!-- This declares the document type and version of HTML being used. -->
 <html lang="en">
+<!-- This starts the HTML document and sets the language to English. -->
 <head>
+    <!-- This section contains metadata about the document, such as character encoding and viewport settings. -->
     <meta charset="UTF-8">
+    <!-- This specifies the character encoding of the document to UTF-8. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- This sets the viewport width to the device width and initial zoom level to 1.0. -->
     <title>Quiz</title>
+    <!-- This sets the title of the webpage. -->
     <style>
+        /* This section contains CSS styling for the webpage layout and elements. */
         body {
+            /* Styles for the body element */
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             margin: 0;
@@ -14,6 +22,7 @@
         }
 
         .container {
+            /* Styles for the container div */
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
@@ -22,6 +31,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .logo {
+            /* Styles for the logo image */
             position: absolute;
             top: 70px;
             left: 275px;
@@ -31,11 +41,13 @@
         }
 
         h1 {
+            /* Styles for the heading */
             text-align: center;
             color: #333;
         }
 
         label {
+            /* Styles for the label */
             display: block;
             margin-bottom: 10px;
             color: #666;
@@ -43,6 +55,7 @@
 
         input[type="text"],
         input[type="email"] {
+            /* Styles for text and email input */
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -53,6 +66,7 @@
         }
 
         button[type="submit"] {
+            /* Styles for the submit button */
             width: 100%;
             padding: 10px;
             background-color: #007bff;
@@ -64,24 +78,38 @@
         }
 
         button[type="submit"]:hover {
-	 padding: 8px 16px;
+            /* Styles for the submit button on hover */
+            padding: 8px 16px;
             background-color: #0056b3;
         }
 
     </style>
 </head>
+<!-- This closes the head section of the document. -->
 <body>
+    <!-- This starts the body of the document. -->
     <div class="container">
+        <!-- This div contains the main content of the webpage. -->
         <h1>Welcome to the Quiz!</h1>
-	 <img class="logo" src="{{ url_for('static',filename='flat.png')}}" alt="Logo">
-
+        <!-- This heading welcomes the user to the quiz. -->
+         <img class="logo" src="{{ url_for('static',filename='flat.png')}}" alt="Logo">
+        <!-- This image displays the logo of the quiz. -->
         <form action="{{ url_for('quiz') }}" method="post">
+            <!-- This form allows the user to submit their name and email to start the quiz. -->
             <label for="name">Enter your name:</label>
+            <!-- This label prompts the user to enter their name. -->
             <input type="text" id="name" name="name" required>
+            <!-- This input field allows the user to enter their name. -->
             <label for="email">Enter your email:</label>
+            <!-- This label prompts the user to enter their email. -->
             <input type="email" id="email" name="email" required>
+            <!-- This input field allows the user to enter their email. -->
             <button type="submit">Start Quiz</button>
+            <!-- This button submits the form to start the quiz. -->
         </form>
     </div>
+    <!-- This closes the container div. -->
 </body>
+<!-- This closes the body section of the document. -->
 </html>
+<!-- This closes the HTML document. -->
