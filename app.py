@@ -71,8 +71,8 @@ def send_email(receiver_email, subject, body):
 def connect_db():
     return mysql.connector.connect(
         host="localhost",
-        user="root",
-        password="Santhu@93800",
+        user="mysql(Enter your MySQL account username)",     #Enter the sql account user name. By default it get it as'root' in windows 
+        password="Enter Your SQL account Password",          #Enter the SQL Account Password 
         database="quiz_data"
     )
 
