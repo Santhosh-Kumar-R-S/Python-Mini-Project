@@ -54,8 +54,12 @@ def calculate_grade(score):
 # Function to send an email
 def send_email(receiver_email, subject, body):
     # Sender's email and password
-    sender_email = "quizteamsuiet@gmail.com"
-    sender_password = "nrca uvcm dkmt gowl"                 #This is not Password of google account. This is google app passward genrated by 2 factor authentication
+    sender_email = "example@gmail.com"
+    sender_password = "ghyt hbky ijho sant"    '''Create the app passward in your 
+    Google account by enabling the 2-Step Verification
+    afterwards you can see create app passward option 
+    then create and enter here.
+    This is example I entered here.''' 
     # Construct the email message
     message = f"Subject: {subject}\n\n{body}"
     # Connect to SMTP server and send the email
