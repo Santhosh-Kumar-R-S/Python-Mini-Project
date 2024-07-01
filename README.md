@@ -5,7 +5,7 @@ Here I uploaded Our team project resource. Our Team project name is Math Quiz. T
 Once the Flask application is running, you can open a web browser and visit the URL http://127.0.0.1:5000 (or whatever URL is shown in the terminal output) to access your Flask application. This will take you to the homepage of the website, as defined in the home.html template. You can then navigate through the different pages of our website by clicking on Start Quiz and it will take you to the another page that is quiz page if you click on the Yes, Start Quiz it will directly takes you to the problems page and afterwards result page. To stop the Flask application, you can press Ctrl + C in the terminal where the Flask server is running. This will stop the server, and you'll no longer be able to access your Flask application until you run the
 <h1>Project Structure</h1>
 Here is the Project Structure
-'''
+```
 Python Mini Project/
      |
      |     
@@ -34,4 +34,4 @@ Python Mini Project/
      |--app.py
      |
      |---quiz_data.db
-'''
+```
